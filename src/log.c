@@ -174,6 +174,8 @@ void load_chat_history(ToxWindow *self, struct chatlog *log)
     if (hstbuf == NULL)
         exit_toxic_err("failed in load_chat_history", FATALERR_MEMORY);
 
+    rewind(log->file);
+
     if (fread(hstbuf, sz, 1, log->file) != 1) {
         free(hstbuf);
         line_info_add(self, NULL, NULL, NULL, SYS_MSG, 0, RED, "* Failed to read log file");
